@@ -19,13 +19,13 @@ import { Outro } from "./scenes/Outro";
 const SCENES: { Comp: React.FC; frames: number }[] = [
   { Comp: Intro, frames: 75 },
   { Comp: Title, frames: 95 },
-  { Comp: Hero, frames: 130 },
-  { Comp: PriceScene, frames: 95 },
-  { Comp: Sauce, frames: 150 },
+  { Comp: Hero, frames: 140 },
+  { Comp: PriceScene, frames: 100 },
+  { Comp: Sauce, frames: 155 },
   { Comp: Drinks, frames: 115 },
   { Comp: Toppings, frames: 110 },
   { Comp: Plates, frames: 150 },
-  { Comp: Outro, frames: 190 },
+  { Comp: Outro, frames: 200 },
 ];
 
 // Voice starts once the incoming transition has mostly settled.

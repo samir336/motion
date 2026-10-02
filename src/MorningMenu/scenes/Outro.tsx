@@ -7,7 +7,7 @@ export const Outro: React.FC = () => {
   const logo = usePop(0);
   const sun = usePop(18, 10, 140);
   const store = usePop(34);
-  const fade = interpolate(frame, [178, 190], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const fade = interpolate(frame, [188, 200], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
     <Background from={COLORS.sunLight} to={COLORS.sun}>
