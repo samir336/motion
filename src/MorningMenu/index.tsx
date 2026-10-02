@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AbsoluteFill, cancelRender, continueRender, delayRender } from "remotion";
+import { AbsoluteFill, Audio, Sequence, cancelRender, continueRender, delayRender, staticFile } from "remotion";
 import { TransitionPresentation, TransitionSeries, springTiming } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import { wipe } from "@remotion/transitions/wipe";
@@ -15,17 +15,21 @@ import { Toppings } from "./scenes/Toppings";
 import { Plates } from "./scenes/Plates";
 import { Outro } from "./scenes/Outro";
 
+// Each scene's voiceover line lives in public/voice/vo<n>.mp3 (script in public/voice/script.txt).
 const SCENES: { Comp: React.FC; frames: number }[] = [
   { Comp: Intro, frames: 75 },
   { Comp: Title, frames: 95 },
-  { Comp: Hero, frames: 120 },
+  { Comp: Hero, frames: 130 },
   { Comp: PriceScene, frames: 95 },
-  { Comp: Sauce, frames: 105 },
+  { Comp: Sauce, frames: 150 },
   { Comp: Drinks, frames: 115 },
   { Comp: Toppings, frames: 110 },
   { Comp: Plates, frames: 150 },
-  { Comp: Outro, frames: 105 },
+  { Comp: Outro, frames: 190 },
 ];
+
+// Voice starts once the incoming transition has mostly settled.
+const VOICE_DELAY = 8;
 
 // Alternate punchy transitions between scenes, like a fast-cut food reel.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -72,6 +76,9 @@ export const MorningMenu: React.FC = () => {
           <React.Fragment key={i}>
             <TransitionSeries.Sequence durationInFrames={frames}>
               <Comp />
+              <Sequence from={i === 0 ? 4 : VOICE_DELAY} layout="none">
+                <Audio src={staticFile(`voice/vo${i + 1}.mp3`)} />
+              </Sequence>
             </TransitionSeries.Sequence>
             {i < TRANSITIONS.length ? (
               <TransitionSeries.Transition
